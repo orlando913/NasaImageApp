@@ -4,31 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <LinearLayout
+    tools:context=".ImageDownActivity">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical">
 
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal_200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Nasa Image Finder"
             android:id="@+id/toolbar"/>
 
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             tools:openDrawer="start">
             <com.google.android.material.navigation.NavigationView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
@@ -36,49 +33,43 @@
                 app:menu="@menu/drawer_menu"
                 android:id="@+id/nav_view"/>
         </androidx.drawerlayout.widget.DrawerLayout>
-
-
-
-
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dte"
+        android:hint="DATE"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        />
 
-        <TextView
-            android:id="@+id/welcome"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:layout_marginTop="100dp"
-            android:text="Welcome"/>
-        <TextView
-            android:id="@+id/welname"
+            android:layout_below="@+id/plus"
+            android:id="@+id/im"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plus"
+            android:layout_below="@id/dte"
+            android:layout_alignParentRight="true"/>
+
+
+        <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="20sp"/>
-
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/name"
-            android:hint="Input Name"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Enter"
-            android:id="@+id/enter"/>
-
-
-    </LinearLayout>
-
-
-
-
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progress"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/im"
+            android:max="100"
+            android:progress="45"
+            />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

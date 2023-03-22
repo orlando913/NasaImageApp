@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/Home"
+        android:title="Home"
+        android:orderInCategory="75"
+        app:showAsAction="never"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+    <item android:id="@+id/help"
+        android:icon="@drawable/help"
+        android:title="Help"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"
+        />
+    <item android:id="@+id/Slist"
+        android:title="Saved List"
+        app:showAsAction="never"
+        android:orderInCategory="100"/>
+
+    <item android:id="@+id/IDown"
+        android:orderInCategory="400"
+        app:showAsAction="never"
+        android:title="Image Downloader"/>
+
+    <item android:id="@+id/view"
+        android:title="View"
+
+        android:orderInCategory="500"/>
+</menu>
