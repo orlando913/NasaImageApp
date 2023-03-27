@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class VIewerActivity extends AppCompatActivity {
+public class VIewerActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
