@@ -6,12 +6,6 @@
         android:orderInCategory="75"
         app:showAsAction="never"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
 
-    <item android:id="@+id/help"
-        android:icon="@drawable/help"
-        android:title="Help"
-        app:showAsAction="ifRoom"
-        android:orderInCategory="1"
-        />
     <item android:id="@+id/Slist"
         android:title="Saved List"
         app:showAsAction="never"
