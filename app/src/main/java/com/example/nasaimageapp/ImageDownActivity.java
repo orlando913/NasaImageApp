@@ -1,7 +1,12 @@
 package com.example.nasaimageapp;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.text.PrecomputedTextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
 import android.graphics.Bitmap;
@@ -33,6 +38,21 @@ public class ImageDownActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_down);
+
+        //For toolbar:
+        Toolbar tBar = findViewById(R.id.toolbar);
+        setSupportActionBar(tBar);
+
+
+        //For NavigationDrawer:
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         mImageView = findViewById(R.id.im);
         mNameTextView = findViewById(R.id.iName);

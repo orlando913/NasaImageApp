@@ -56,7 +56,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked item 1";
+                message = "Touch any element from the list to display the image.";
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
