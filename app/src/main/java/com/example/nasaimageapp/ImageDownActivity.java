@@ -59,7 +59,7 @@ public class ImageDownActivity extends BaseActivity {
         mExplanationTextView = findViewById(R.id.explanation);
         mDateTextView = findViewById(R.id.iDate);
 
-        String apiUrl = "https://api.nasa.gov/planetary/apod?api_key=YOUR_API_KEY";
+        String apiUrl = "https://api.nasa.gov/planetary/apod?api_key=QLiIb7c2IgcMOHiGbSUR4QuubFwcggLHsFkC2dlf";
         new FetchAPODData(mImageView, mNameTextView, mExplanationTextView, mDateTextView).execute(apiUrl);
 
 
