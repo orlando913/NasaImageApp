@@ -13,6 +13,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +34,7 @@ import java.net.URL;
 
 public class ImageDownActivity extends BaseActivity {
     private ImageView mImageView;
+    private ImageButton mButton;
     private TextView mNameTextView;
     private TextView mExplanationTextView;
     private TextView mDateTextView;
@@ -54,16 +59,39 @@ public class ImageDownActivity extends BaseActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mImageView = findViewById(R.id.im);
-        mNameTextView = findViewById(R.id.iName);
-        mExplanationTextView = findViewById(R.id.explanation);
-        mDateTextView = findViewById(R.id.iDate);
+       // mImageView = findViewById(R.id.im);
+      //  mNameTextView = findViewById(R.id.iName);
+     //   mExplanationTextView = findViewById(R.id.explanation);
+      //  mDateTextView = findViewById(R.id.iDate);
+        EditText dateEditText = findViewById(R.id.dte);
+
+        mButton = findViewById(R.id.plus);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String date = dateEditText.getText().toString();
+                BlankFragment fragment = new BlankFragment();
+                Bundle args = new Bundle();
+                args.putString("image_url", getImageUrlForDate(date));
+                fragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragFrame, fragment)
+                        .commit();
+            }
+        });
+
 
         String apiUrl = "https://api.nasa.gov/planetary/apod?api_key=QLiIb7c2IgcMOHiGbSUR4QuubFwcggLHsFkC2dlf";
-        new FetchAPODData(mImageView, mNameTextView, mExplanationTextView, mDateTextView).execute(apiUrl);
+        FetchAPODData fetchAPODData = new FetchAPODData(mImageView, mNameTextView,
+                mExplanationTextView, mDateTextView, dateEditText);
+        fetchAPODData.execute(apiUrl);
 
 
 
+    }
+    private String getImageUrlForDate(String date) {
+        return "https://api.nasa.gov/planetary/apod?api_key=QLiIb7c2IgcMOHiGbSUR4QuubFwcggLHsFkC2dlf";
     }
 
 }

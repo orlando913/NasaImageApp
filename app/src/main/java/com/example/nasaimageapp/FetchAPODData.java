@@ -3,6 +3,7 @@ package com.example.nasaimageapp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,19 +22,23 @@ public class FetchAPODData extends AsyncTask<String, Void, JSONObject> {
     private TextView mNameTextView;
     private TextView mExplanationTextView;
     private TextView mDateTextView;
+    private EditText mDateEditText;
 
     public FetchAPODData(ImageView imageView, TextView nameTextView,
-                         TextView explanationTextView, TextView dateTextView) {
+                         TextView explanationTextView, TextView dateTextView, EditText dateEditText) {
         mImageView = imageView;
         mNameTextView = nameTextView;
         mExplanationTextView = explanationTextView;
         mDateTextView = dateTextView;
+        mDateEditText =dateEditText;
     }
 
     @Override
     protected JSONObject doInBackground(String... urls) {
+        String date = mDateEditText.getText().toString();
+        String urlString = urls[0] + "&date=" + date;
         try {
-            URL url = new URL(urls[0]);
+            URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
