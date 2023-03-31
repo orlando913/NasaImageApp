@@ -58,12 +58,38 @@
             android:id="@+id/plus"
             android:layout_below="@id/dte"
             android:layout_alignParentRight="true"/>
-        <FrameLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dte"
-            android:id="@+id/fragFrame"
+            android:id="@+id/im"
+            android:scaleType="fitCenter"
             />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progress"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/im"
+            android:max="100"
+            android:progress="45"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iName"
+            android:layout_below="@+id/progress"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iDate"
+            android:layout_below="@id/iName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/explanation"
+            android:layout_below="@+id/iDate"/>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

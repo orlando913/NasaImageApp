@@ -72,23 +72,23 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             case R.id.Home: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                finish();
-            }
                 break;
+            }
+
             case R.id.Slist: {
                 Intent intent = new Intent(this, SListViewActivity.class);
                 startActivity(intent);
-                finish();
+                break;
             }
             case R.id.IDown: {
                 Intent intent = new Intent(this, ImageDownActivity.class);
                 startActivity(intent);
-                finish();
+                break;
             }
             case R.id.view:
                 Intent intent = new Intent(this, VIewerActivity.class);
                 startActivity(intent);
-                finish();
+                break;
         }
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);

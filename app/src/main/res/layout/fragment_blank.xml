@@ -15,22 +15,6 @@
         android:id="@+id/im"
         android:scaleType="fitCenter"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/iName"
-        android:layout_below="@+id/progress"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/iDate"
-        android:layout_below="@id/iName"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/explanation"
-        android:layout_below="@+id/iDate"/>
-
 
     <ProgressBar
         android:layout_width="match_parent"

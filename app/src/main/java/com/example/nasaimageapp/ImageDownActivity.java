@@ -38,6 +38,7 @@ public class ImageDownActivity extends BaseActivity {
     private TextView mNameTextView;
     private TextView mExplanationTextView;
     private TextView mDateTextView;
+    private EditText dateEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,11 @@ public class ImageDownActivity extends BaseActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-       // mImageView = findViewById(R.id.im);
-      //  mNameTextView = findViewById(R.id.iName);
-     //   mExplanationTextView = findViewById(R.id.explanation);
-      //  mDateTextView = findViewById(R.id.iDate);
-        EditText dateEditText = findViewById(R.id.dte);
+         mImageView = findViewById(R.id.im);
+         mNameTextView = findViewById(R.id.iName);
+        mExplanationTextView = findViewById(R.id.explanation);
+        mDateTextView = findViewById(R.id.iDate);
+        dateEditText = findViewById(R.id.dte);
 
         mButton = findViewById(R.id.plus);
 
@@ -71,14 +72,35 @@ public class ImageDownActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String date = dateEditText.getText().toString();
-                BlankFragment fragment = new BlankFragment();
-                Bundle args = new Bundle();
-                args.putString("image_url", getImageUrlForDate(date));
-                fragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragFrame, fragment)
-                        .commit();
+                String imageUrl = getImageUrlForDate(date);
+                new DownloadImageTask().execute(imageUrl);
+
+                //update fragment
+                mNameTextView.setText("Name");
+                mExplanationTextView.setText("Explanation");
+                mDateTextView.setText("Date");
             }
+            class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+                @Override
+                protected Bitmap doInBackground(String... urls) {
+                    String imageUrl = urls[0];
+                    Bitmap bitmap = null;
+                    try {
+                        InputStream in = new URL(imageUrl).openStream();
+                        bitmap = BitmapFactory.decodeStream(in);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return bitmap;
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap result) {
+                    mImageView.setImageBitmap(result);
+                }
+            }
+
         });
 
 
