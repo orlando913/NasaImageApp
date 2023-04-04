@@ -4,28 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BlankFragment">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/im"
-        android:scaleType="fitCenter"
-        />
+        android:layout_height="match_parent">
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:id="@+id/progress"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/im"
-        android:max="100"
-        android:progress="45"
-        />
-</RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/im"
+                android:scaleType="fitCenter"
+                />
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/progress"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/im"
+                android:max="100"
+                android:progress="100"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/iName"
+                android:layout_below="@+id/progress"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/iDate"
+                android:layout_below="@id/iName"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/explanation"
+                android:layout_below="@+id/iDate"/>
+
+        </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

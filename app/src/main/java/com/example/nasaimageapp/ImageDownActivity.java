@@ -79,6 +79,9 @@ public class ImageDownActivity extends BaseActivity {
                 mNameTextView.setText("Name");
                 mExplanationTextView.setText("Explanation");
                 mDateTextView.setText("Date");
+                FetchAPODData fetchAPODData = new FetchAPODData(mImageView, mNameTextView,
+                        mExplanationTextView, mDateTextView, dateEditText);
+                fetchAPODData.execute(imageUrl);
             }
             class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
@@ -104,16 +107,13 @@ public class ImageDownActivity extends BaseActivity {
         });
 
 
-        String apiUrl = "https://api.nasa.gov/planetary/apod?api_key=QLiIb7c2IgcMOHiGbSUR4QuubFwcggLHsFkC2dlf";
-        FetchAPODData fetchAPODData = new FetchAPODData(mImageView, mNameTextView,
-                mExplanationTextView, mDateTextView, dateEditText);
-        fetchAPODData.execute(apiUrl);
+
 
 
 
     }
     private String getImageUrlForDate(String date) {
-        return "https://api.nasa.gov/planetary/apod?api_key=QLiIb7c2IgcMOHiGbSUR4QuubFwcggLHsFkC2dlf";
+        return "https://api.nasa.gov/planetary/apod?api_key=QLiIb7c2IgcMOHiGbSUR4QuubFwcggLHsFkC2dlf&date="+date;
     }
 
 }
