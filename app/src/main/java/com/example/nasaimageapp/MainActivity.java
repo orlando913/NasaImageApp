@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        //save name from edit text
         EditText svName = findViewById(R.id.name);
         String currentValue = svName.getText().toString();
         SharedPreferences sPre = getSharedPreferences("app_preferences", MODE_PRIVATE);
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+// For toolbar
         Toolbar tBar = findViewById(R.id.toolbar);
         setSupportActionBar(tBar);
 
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity {
         name = (TextView) findViewById(R.id.welname);
         text = (EditText) findViewById(R.id.name);
 
-
+// call for name previously saved
         final int REQUEST_CODE = 1;
 
         SharedPreferences sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE);
