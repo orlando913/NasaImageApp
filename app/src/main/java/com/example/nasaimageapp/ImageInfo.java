@@ -1,22 +1,50 @@
 package com.example.nasaimageapp;
 
 public class ImageInfo {
+    private String name;
     private String date;
-    private String imageUrl;
+    private String explanation;
+    private String imagePath;
 
 
 
-    public ImageInfo(String imageName, String imageUrl, String toString, String date) {
+    public ImageInfo() {
+        this.name = name;
         this.date = date;
-        this.imageUrl = imageUrl;
+        this.explanation = explanation;
+        this.imagePath = imagePath;
+    }
+
+    // getters and setters
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDate() {
         return date;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public void setDate(String date) {
+        this.date = date;
     }
 
+    public String getExplanation() {
+        return explanation;
+    }
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 }

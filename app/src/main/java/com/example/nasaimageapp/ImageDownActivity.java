@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,9 @@ import java.util.List;
 
 public class ImageDownActivity extends BaseActivity {
 
+    int progressV = 0;
+    ProgressBar pBar;
+
     // declare elements
     private ImageView mImageView;
     private ImageButton mButton;
@@ -55,6 +59,9 @@ public class ImageDownActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_down);
+//progressbaf
+        pBar = (ProgressBar) findViewById(R.id.progress);
+        pBar.setVisibility(View.GONE);
 
         //For toolbar:
         Toolbar tBar = findViewById(R.id.toolbar);
@@ -101,6 +108,20 @@ public class ImageDownActivity extends BaseActivity {
 
                 Toast.makeText(ImageDownActivity.this, "Image added", Toast.LENGTH_SHORT).show();
 
+                // create a new ImageInfo object with the relevant information
+                ImageInfo imageInfo = new ImageInfo();
+                imageInfo.setName("Name");
+                imageInfo.setDate(date);
+                imageInfo.setExplanation("Explanation");
+                imageInfo.setImagePath(imageUrl);
+
+                // add the ImageInfo object to the list
+                imageInfoList.add(imageInfo);
+
+                // populate the list with ImageInfo objects
+                Intent intent = new Intent(ImageDownActivity.this, SListViewActivity.class);
+                intent.putExtra("imageInfoList", new Gson().toJson(imageInfoList));
+
                 //update elements
                 mNameTextView.setText("Name");
                 mExplanationTextView.setText("Explanation");
@@ -108,29 +129,34 @@ public class ImageDownActivity extends BaseActivity {
                 FetchAPODData fetchAPODData = new FetchAPODData(mImageView, mNameTextView,
                         mExplanationTextView, mDateTextView, dateEditText);
                 fetchAPODData.execute(imageUrl);
-                // get the image info
-                Bitmap imageBitmap =  Bitmap.createBitmap(mImageView.getWidth(),mImageView.getHeight(),Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(imageBitmap);
-                mImageView.draw(canvas);
-                String imageName = "image_" + date + ".png";
-                String imageFilePath = saveImageToFile(imageBitmap, imageName);
 
-                // create the ImageInfo object and add it to the list
-                ImageInfo imageInfo = new ImageInfo(imageName ,imageUrl, mExplanationTextView.getText().toString(), date);
-                imageInfoList.add(imageInfo);
-
-                // start the new activity with the list of ImageInfo objects
-                Intent intent = new Intent(ImageDownActivity.this, SListViewActivity.class);
-                intent.putExtra("imageInfoList", new Gson().toJson(imageInfoList));
-                startActivity(intent);
+                setProgressValue(progressV);
 
                 dateEditText.setText("");
 
 
             }
 
+            private void setProgressValue (final int progressV){
+                pBar.setProgress(progressV);
+                Thread thread = new Thread(() -> {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    setProgressValue(progressV + 10);
+                });
+                thread.start();
+            }
+
             class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
+
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    pBar.setVisibility(View.VISIBLE);
+                }
                 @Override
                 protected Bitmap doInBackground(String... urls) {
                     // get image
@@ -148,6 +174,7 @@ public class ImageDownActivity extends BaseActivity {
                 @Override
                 protected void onPostExecute(Bitmap result) {
                     mImageView.setImageBitmap(result);
+                    pBar.setVisibility(View.GONE);
                 }
             }
 
@@ -168,6 +195,7 @@ public class ImageDownActivity extends BaseActivity {
                 }
                 return imageFile.getAbsolutePath();
             }
+
 
         });
 
