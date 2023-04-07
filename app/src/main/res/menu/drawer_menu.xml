@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/Home"
-        android:title="Home"
+        android:title="@string/home"
         android:orderInCategory="75"
         app:showAsAction="never"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
 
     <item android:id="@+id/Slist"
-        android:title="Saved List"
+        android:title="@string/saved_list"
         app:showAsAction="never"
         android:orderInCategory="100"/>
 
     <item android:id="@+id/IDown"
         android:orderInCategory="400"
         app:showAsAction="never"
-        android:title="Image Downloader"/>
+        android:title="@string/image_downloader"/>
 
     <item android:id="@+id/view"
-        android:title="View"
+        android:title="@string/view"
 
         android:orderInCategory="500"/>
 </menu>

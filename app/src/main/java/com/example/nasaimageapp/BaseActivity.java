@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -66,29 +67,21 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected( MenuItem item) {
 
         String message = null;
+        int id = item.getItemId();
 
-        switch(item.getItemId())
-        {
-            case R.id.Home: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                break;
-            }
-
-            case R.id.Slist: {
-                Intent intent = new Intent(this, SListViewActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.IDown: {
-                Intent intent = new Intent(this, ImageDownActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.view:
-                Intent intent = new Intent(this, VIewerActivity.class);
-                startActivity(intent);
-                break;
+        if (id == R.id.Home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Log.d("Drawer", "Home button clicked");
+        } else if (id == R.id.Slist) {
+            Intent intent = new Intent(this, SListViewActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.IDown) {
+            Intent intent = new Intent(this, ImageDownActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.view) {
+            Intent intent = new Intent(this, VIewerActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);

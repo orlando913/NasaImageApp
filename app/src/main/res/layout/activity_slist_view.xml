@@ -36,6 +36,7 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             android:background="#94d1f7"
+            app:background="@drawable/drawback"
             app:headerLayout="@layout/header_layout"
             app:menu="@menu/drawer_menu"
             android:id="@+id/nav_view"/>

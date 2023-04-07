@@ -5,4 +5,8 @@
     <string name="message">greetings changed</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="home">Home</string>
+    <string name="saved_list">Saved List</string>
+    <string name="image_downloader">Image Downloader</string>
+    <string name="view">View</string>
 </resources>
