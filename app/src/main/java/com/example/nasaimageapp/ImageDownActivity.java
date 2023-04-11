@@ -1,5 +1,7 @@
 package com.example.nasaimageapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -80,8 +82,8 @@ public class ImageDownActivity extends BaseActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         // update elements
-         mImageView = findViewById(R.id.im);
-         mNameTextView = findViewById(R.id.iName);
+        mImageView = findViewById(R.id.im);
+        mNameTextView = findViewById(R.id.iName);
         mExplanationTextView = findViewById(R.id.explanation);
         mDateTextView = findViewById(R.id.iDate);
         dateEditText = findViewById(R.id.dte);
@@ -95,7 +97,7 @@ public class ImageDownActivity extends BaseActivity {
         // populate the list with ImageInfo objects
         Intent intent = new Intent(this, SListViewActivity.class);
         intent.putExtra("imageInfoList", new Gson().toJson(imageInfoList));
-        startActivity(intent);
+        // startActivity(intent);
 
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +108,7 @@ public class ImageDownActivity extends BaseActivity {
                 String date = dateEditText.getText().toString();
                 String imageUrl = getImageUrlForDate(date);
                 new DownloadImageTask().execute(imageUrl);
+
 
                 Toast.makeText(ImageDownActivity.this, "Image added", Toast.LENGTH_SHORT).show();
 
@@ -138,25 +141,30 @@ public class ImageDownActivity extends BaseActivity {
 
             }
 
-            private void setProgressValue (final int progressV){
-                pBar.setProgress(progressV);
-                Thread thread = new Thread(() -> {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    setProgressValue(progressV + 10);
-                });
-                thread.start();
+            private void setProgressValue(final int progressV) {
+                if (progressV < 100) {
+                    pBar.setProgress(progressV);
+                    Thread thread = new Thread(() -> {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        setProgressValue(progressV + 10);
+                    });
+                    thread.start();
+                }
             }
 
             class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+                private String imageName;
 
 
                 protected void onPreExecute() {
                     super.onPreExecute();
                     pBar.setVisibility(View.VISIBLE);
+                    imageName = "image_" + System.currentTimeMillis() + ".png"; // generate a unique name for the image
                 }
                 @Override
                 protected Bitmap doInBackground(String... urls) {
@@ -176,6 +184,7 @@ public class ImageDownActivity extends BaseActivity {
                 protected void onPostExecute(Bitmap result) {
                     mImageView.setImageBitmap(result);
                     pBar.setVisibility(View.GONE);
+                    saveImageToFile(result, imageName);
                 }
             }
 
@@ -188,9 +197,16 @@ public class ImageDownActivity extends BaseActivity {
                 File imageFile = new File(imagePath, imageName);
                 try {
                     FileOutputStream fos = new FileOutputStream(imageFile);
-                    imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                    fos.flush();
-                    fos.close();
+                    if(imageBitmap != null) {
+                        // call the compress method on the bitmap object
+                        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                        fos.close();
+                    } else {
+                        // handle the case where the bitmap is null
+                        Log.e(TAG, "Bitmap is null");
+                    }
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -200,12 +216,10 @@ public class ImageDownActivity extends BaseActivity {
 
         });
 
-
-
-
-
-
     }
+    int customRowLayout = R.layout.row_layout;
+
+
 
 
     private String getImageUrlForDate(String date) {

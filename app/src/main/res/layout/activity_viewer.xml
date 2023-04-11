@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VIewerActivity">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".ViewerActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,73 +15,29 @@
 
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="#0755E0"
-            app:title="Nasa APOD"
             app:titleTextColor="#FFFF"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:title="Viewer V1"
+            android:id="@+id/toolbar"/>
 
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:layout_below="@+id/toolbar"
             tools:openDrawer="start">
-        <com.google.android.material.navigation.NavigationView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            android:layout_above ="@id/scroll"
-            android:background="#94d1f7"
-            app:headerLayout="@layout/header_layout"
-            app:menu="@menu/drawer_menu"
-            app:background="@drawable/drawback"
-            android:id="@+id/nav_view"/>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/Cat"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <ImageButton
+            <com.google.android.material.navigation.NavigationView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/back"/>
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:id="@+id/bar"
-            android:max="100"
-            android:layout_alignParentBottom="true"
-            />
-
-            <ImageButton
-                android:id="@+id/go"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
+                android:layout_gravity="start"
+                android:background="#94d1f7"
+                android:fitsSystemWindows="true"
+                app:headerLayout="@layout/header_layout"
+                app:menu="@menu/drawer_menu"
+                android:id="@+id/nav_view"/>
         </androidx.drawerlayout.widget.DrawerLayout>
-    </RelativeLayout>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

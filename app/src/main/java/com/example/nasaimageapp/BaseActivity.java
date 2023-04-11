@@ -24,7 +24,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        //For toolbar:
         Toolbar tBar = findViewById(R.id.toolbar);
         setSupportActionBar(tBar);
 
@@ -39,6 +38,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -46,15 +46,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.menu, menu);
 
 
-
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             //what to do when the menu item is selected:
             case R.id.item1:
                 message = "Touch any element from the list to display the image.";
@@ -63,25 +62,33 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
     }
+
     @Override
-    public boolean onNavigationItemSelected( MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         String message = null;
-        int id = item.getItemId();
 
-        if (id == R.id.Home) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            Log.d("Drawer", "Home button clicked");
-        } else if (id == R.id.Slist) {
-            Intent intent = new Intent(this, SListViewActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.IDown) {
-            Intent intent = new Intent(this, ImageDownActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.view) {
-            Intent intent = new Intent(this, VIewerActivity.class);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case R.id.Home: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            }
+
+            case R.id.Slist: {
+                Intent intent = new Intent(this, SListViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.IDown: {
+                Intent intent = new Intent(this, ImageDownActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.view:
+                Intent intent = new Intent(this, VIewerActivity.class);
+                startActivity(intent);
+                break;
         }
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);

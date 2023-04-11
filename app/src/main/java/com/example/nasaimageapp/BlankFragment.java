@@ -12,45 +12,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;
+import java.util.List;
 
 public class BlankFragment extends Fragment {
-    private ImageView mImageView;
-    private TextView mNameTextView;
-    private TextView mDateTextView;
-    private TextView explanation;
+    private List<ImageInfo> imageInfoList;
 
-    public static BlankFragment newInstance(String name, String height, String mass) {
-        Bundle args = new Bundle();
-        args.putString("name", name);
-        args.putString("height", height);
-        args.putString("mass", mass);
 
-        BlankFragment fragment = new BlankFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
+
+        // Find the ListView inside the fragment
+        ListView listView = rootView.findViewById(R.id.listView);
+
+        // Set the adapter
+        ImageInfoAdapter adapter = new ImageInfoAdapter(getActivity(), R.layout.row_layout, imageInfoList);
+        listView.setAdapter(adapter);
 
 
+        return rootView;
 
-        Bundle args = getArguments();
-        if (args != null) {
-            String name = args.getString("name");
-            String height = args.getString("height");
-            String mass = args.getString("mass");
-
-
-        }
-
-        return view;
 
     }
-
 }

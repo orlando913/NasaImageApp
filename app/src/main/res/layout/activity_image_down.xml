@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,118 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".ImageDownActivity">
 
-
-
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#0755E0"
-        app:title="Nasa APOD"
-        app:titleTextColor="#FFFF"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#0755E0"
+            app:title="Image Downloader V1"
+            app:titleTextColor="#FFFF"
+            android:elevation="4dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:layout_below="@+id/toolbar"
-        tools:openDrawer="start">
-        <com.google.android.material.navigation.NavigationView
-            android:layout_width="wrap_content"
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            android:layout_above ="@id/scroll"
-            android:background="#94d1f7"
-            app:headerLayout="@layout/header_layout"
-            app:menu="@menu/drawer_menu"
-            app:background="@drawable/drawback"
-            android:id="@+id/nav_view"/>
+            android:layout_below="@+id/toolbar"
+            tools:openDrawer="start">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:id="@+id/scroll"
-            android:layout_height="match_parent"
-            android:layout_below="@id/nav_view"
-            >
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dte"
+                    android:hint="DATE YYYY-MM-DD"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    />
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add"
+                    android:id="@+id/plus"
+                    android:layout_below="@id/dte"
+                    android:layout_centerHorizontal="true"
+                    />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dte"
-            android:hint="DATE YYYY-MM-DD"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true"
-            />
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:id="@+id/scroll"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/plus"
+                    >
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add"
-            android:id="@+id/plus"
-            android:layout_below="@id/dte"
-            android:layout_centerHorizontal="true"/>
-        <ImageView
-            android:id="@+id/im"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/plus"
-            android:scaleType="fitCenter"
-            />
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:id="@+id/progress"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/im"
-            android:max="100"
-            android:progress="100"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/iName"
-            android:layout_below="@+id/progress"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/iDate"
-            android:layout_below="@id/iName"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/explanation"
-            android:layout_below="@+id/iDate"/>
+                        <ImageView
+                            android:id="@+id/im"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitCenter"
+                            />
 
-        </RelativeLayout>
-        </ScrollView>
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:id="@+id/progress"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/im"
+                            android:max="100"
+                            android:progress="100"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/iName"
+                            android:layout_below="@+id/progress"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/iDate"
+                            android:layout_below="@id/iName"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/explanation"
+                            android:layout_below="@+id/iDate"/>
 
+                    </RelativeLayout>
+                </ScrollView>
 
+            </RelativeLayout>
 
+            <com.google.android.material.navigation.NavigationView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:fitsSystemWindows="true"
+                android:background="#94d1f7"
+                app:headerLayout="@layout/header_layout"
+                app:menu="@menu/drawer_menu"
+                android:id="@+id/nav_view"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
+        </androidx.drawerlayout.widget.DrawerLayout>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
-    </RelativeLayout>
-
-
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

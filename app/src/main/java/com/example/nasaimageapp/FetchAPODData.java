@@ -17,7 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class FetchAPODData extends AsyncTask<String, Void, JSONObject> {
-
     private ImageView mImageView;
     private TextView mNameTextView;
     private TextView mExplanationTextView;

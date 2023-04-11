@@ -48,3 +48,4 @@ public class ImageInfo {
         this.imagePath = imagePath;
     }
 }
+
