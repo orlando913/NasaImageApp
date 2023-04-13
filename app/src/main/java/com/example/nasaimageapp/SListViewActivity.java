@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,9 +33,11 @@ import java.util.List;
 
 public class SListViewActivity extends BaseActivity {
 
-    ListView listView;
-
     int customRowLayout = R.layout.row_layout;
+    private ListView listView;
+    private ImageInfoAdapter adapter;
+    private List<ImageInfo> imageInfoList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,29 +59,22 @@ public class SListViewActivity extends BaseActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         // Add the fragment to the activity
-        BlankFragment myFragment = new BlankFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.framer, myFragment)
-                .commit();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameL, new BlankFragment());
+        transaction.addToBackStack(null); // Add the transaction to the back stack
+        transaction.commit();
 
 
         // get the list of ImageInfo objects from the Intent
         String imageInfoListJson = getIntent().getStringExtra("imageInfoList");
         List<ImageInfo> imageInfoList = new Gson().fromJson(imageInfoListJson, new TypeToken<List<ImageInfo>>(){}.getType());
 
-        listView = findViewById(R.id.listView);
-
-        List<String> fileNames = getImageFileNames();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, fileNames);
-
-        listView.setAdapter(adapter);
 
 
 
     }
-    private List<String> getImageFileNames() {
+    List<String> getImageFileNames() {
         List<String> fileNames = new ArrayList<>();
         File imagePath = new File(getExternalFilesDir(null), "images");
         if (imagePath.exists() && imagePath.isDirectory()) {
@@ -96,6 +92,7 @@ public class SListViewActivity extends BaseActivity {
         }
         return fileNames;
     }
+
 
     // define the custom adapter
     private class ImageInfoAdapter extends ArrayAdapter<ImageInfo> {
