@@ -9,4 +9,5 @@
     <string name="saved_list">Saved List</string>
     <string name="image_downloader">Image Downloader</string>
     <string name="view">View</string>
+    <string name="noimage">No images found</string>
 </resources>

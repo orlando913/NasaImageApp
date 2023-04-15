@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -88,8 +89,13 @@ public class FetchAPODData extends AsyncTask<String, Void, JSONObject> {
             String imageUrl = urls[0];
             Bitmap bitmap = null;
             try {
+                URL url = new URL(imageUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
                 InputStream in = new URL(imageUrl).openStream();
                 bitmap = BitmapFactory.decodeStream(in);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -98,6 +104,19 @@ public class FetchAPODData extends AsyncTask<String, Void, JSONObject> {
 
         protected void onPostExecute(Bitmap result) {
             imageView.setImageBitmap(result);
+            String fileName = "image.png";
+            saveImageToFile(result, fileName);
+        }
+        private void saveImageToFile(Bitmap bitmap, String fileName) {
+            try {
+                FileOutputStream out = new FileOutputStream(fileName);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.flush();
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

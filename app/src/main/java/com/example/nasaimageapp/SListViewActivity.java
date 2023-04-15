@@ -59,7 +59,12 @@ public class SListViewActivity extends BaseActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         // Add the fragment to the activity
+        BlankFragment fragment = BlankFragment.newInstance(imageInfoList);
 
+// add the fragment to the activity
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameL, fragment)
+                .commit();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameL, new BlankFragment());
         transaction.addToBackStack(null); // Add the transaction to the back stack

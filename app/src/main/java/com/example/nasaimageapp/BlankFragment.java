@@ -66,7 +66,7 @@ public class BlankFragment extends Fragment {
         if (imageInfoList == null || imageInfoList.isEmpty()) {
             // show an error message in the list view
             TextView textView = new TextView(getActivity());
-            textView.setText("No images found");
+            textView.setText(R.string.noimage);
             listView.setEmptyView(textView);
             return view;
         }

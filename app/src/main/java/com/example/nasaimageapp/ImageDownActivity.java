@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -107,7 +109,8 @@ public class ImageDownActivity extends BaseActivity {
                 //call for date from editext
                 String date = dateEditText.getText().toString();
                 String imageUrl = getImageUrlForDate(date);
-                new DownloadImageTask().execute(imageUrl);
+
+
 
 
                 Toast.makeText(ImageDownActivity.this, "Image added", Toast.LENGTH_SHORT).show();
@@ -135,6 +138,11 @@ public class ImageDownActivity extends BaseActivity {
                 fetchAPODData.execute(imageUrl);
 
                 setProgressValue(progressV);
+                // get a reference to the InputMethodManager
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+// hide the keyboard
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                 dateEditText.setText("");
 
@@ -156,62 +164,10 @@ public class ImageDownActivity extends BaseActivity {
                 }
             }
 
-            class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-
-                private String imageName;
 
 
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    pBar.setVisibility(View.VISIBLE);
-                    imageName = "image_" + System.currentTimeMillis() + ".png"; // generate a unique name for the image
-                }
-                @Override
-                protected Bitmap doInBackground(String... urls) {
-                    // get image
-                    String imageUrl = urls[0];
-                    Bitmap bitmap = null;
-                    try {
-                        InputStream in = new URL(imageUrl).openStream();
-                        bitmap = BitmapFactory.decodeStream(in);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return bitmap;
-                }
-
-                @Override
-                protected void onPostExecute(Bitmap result) {
-                    mImageView.setImageBitmap(result);
-                    pBar.setVisibility(View.GONE);
-                    saveImageToFile(result, imageName);
-                }
-            }
-
-            private String saveImageToFile(Bitmap imageBitmap, String imageName) {
-                // save the image to file
-                File imagePath = new File(getExternalFilesDir(null), "images");
-                if (!imagePath.exists()) {
-                    imagePath.mkdir();
-                }
-                File imageFile = new File(imagePath, imageName);
-                try {
-                    FileOutputStream fos = new FileOutputStream(imageFile);
-                    if(imageBitmap != null) {
-                        // call the compress method on the bitmap object
-                        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                        fos.close();
-                    } else {
-                        // handle the case where the bitmap is null
-                        Log.e(TAG, "Bitmap is null");
-                    }
 
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return imageFile.getAbsolutePath();
-            }
 
 
         });
